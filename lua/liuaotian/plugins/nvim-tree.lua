@@ -1,4 +1,5 @@
 -- Explore
+
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
@@ -11,7 +12,7 @@ return {
     vim.g.loaded_netrwPlugin = 1
     nvimtree.setup({
       -- 当最后只剩下nerdtree的时候自动关闭 失效
-      auto_close = true,
+      -- auto_close = true,
       view = {
         width = 25,
         -- 默认会显示这个信号列，但是在nvim-tree中要这个干什么？有行号有这个显得很蠢
@@ -39,9 +40,9 @@ return {
 	      open_file = {
 		      quit_on_open = true,
 	      },
-	      window_picker = {
-		      enable = false,
-	      },
+	      -- window_picker = {
+		    --  enable = false,
+	      -- },
       },
       filters = {
         custom = { ".DS_Store" },

@@ -14,4 +14,15 @@ vim.opt.rtp:prepend(lazypath)
 
 
 -- 这样会安装plugins下所有的lua文件
-require("lazy").setup("liuaotian.plugins")
+require("lazy").setup({ 
+  { import = "liuaotian.plugins" }, 
+  { import = "liuaotian.plugins.lsp" },
+  }, {
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
+  },
+})
