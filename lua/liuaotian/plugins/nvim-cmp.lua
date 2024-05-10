@@ -21,16 +21,25 @@ return {
     local lspkind = require("lspkind")
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
-    cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        -- { name = 'path' }
-      }, {
-            { name = 'cmdline' }
-        }),
-      matching = { disallow_symbol_nonprefix_matching = false }
-    })
+    -- 这一段应该是不需要，先注释掉，不影响使用后删除
+    -- cmp.setup.cmdline(':', {
+    --   mapping = cmp.mapping.preset.cmdline(),
+    --   sources = cmp.config.sources({
+    --     -- { name = 'path' }
+    --   }, {
+    --         { name = 'cmdline' }
+    --     }),
+    --   matching = { disallow_symbol_nonprefix_matching = false }
+    -- })
 
+    local compare = require("cmp.config.compare")
+    local source_mapping = {
+      buffer = "[Buffer]",
+      nvim_lsp = "[LSP]",
+      nvim_lua = "[Lua]",
+      cmp_tabnine = "[AI]",
+      path = "[Path]",
+    }
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
@@ -55,17 +64,69 @@ return {
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
-        { name = "nvim_lsp" },
         { name = "cmp-nvim-lua" },
-        { name = "cmp_ai" },
+        { name = "cmp_tabnine" },
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol',
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
+      -- formatting = {
+      --   format = lspkind.cmp_format({
+      --     mode = 'symbol',
+      --     maxwidth = 50,
+      --     ellipsis_char = "...",
+      --   }),
+      --   
+      -- },
+      -- 设置cmp
+
+      -- formatting = {
+      --   format = function(entry, vim_item)
+      --     vim_item.kind = lspkind.presets.default[vim_item.kind]
+      --     local menu = source_mapping[entry.source.name]
+      --     if entry.source.name == "cmp_tabnine" then
+      --       if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+      --         menu = entry.completion_item.data.detail
+      --       end
+      --       vim_item.kind = "󰀂"
+      --     end
+      --     vim_item.menu = menu
+      --
+      --     return vim_item
+      --   end
+      -- },
+			formatting = {
+				format = function(entry, vim_item)
+					-- if you have lspkind installed, you can use it like
+					-- in the following line:
+					vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
+					vim_item.menu = source_mapping[entry.source.name]
+					if entry.source.name == "cmp_tabnine" then
+						local detail = (entry.completion_item.labelDetails or {}).detail
+						vim_item.kind = ""
+						if detail and detail:find('.*%%.*') then
+							vim_item.kind = vim_item.kind .. ' ' .. detail
+						end
+						if (entry.completion_item.data or {}).multiline then
+							vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+						end
+					end
+					local maxwidth = 80
+					vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+					return vim_item
+				end,
+			},
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          require('cmp_tabnine.compare'),
+          compare.offset,
+          compare.exact,
+          compare.score,
+          compare.recently_used,
+          compare.kind,
+          compare.sort_text,
+          compare.length,
+          compare.order,
+        },
       },
     })
   end,
