@@ -41,6 +41,7 @@ return {
 					},
 					win_options = {
 						winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+            -- winbar = "liuaotian", 在popu弹出框中显示的字符
 					},
 				},
 			},
