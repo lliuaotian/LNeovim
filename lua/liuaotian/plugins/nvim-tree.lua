@@ -36,9 +36,9 @@ return {
       -- explorer to work well with
       -- window splits
       actions = {
-	      -- 不起作用，说是可以关闭NvimTree
-	      open_file = {
-		      quit_on_open = true,
+	      -- 明白了，这里是设置打开一个文件的时候不要关闭Nvim-tree
+        open_file = {
+		      quit_on_open = false,
 	      },
 	      -- window_picker = {
 		    --  enable = false,
