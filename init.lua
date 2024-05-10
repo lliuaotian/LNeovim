@@ -5,5 +5,5 @@
 vim.g.mapleader = " "
 
 
-require("liuaotian.core")
 require("liuaotian.lazy")
+require("liuaotian.core")
