@@ -9,8 +9,8 @@ return {
         },
       }),
       sources = cmp.config.sources({
-        {name = "path"},
-        {name = "cmdline"},
+        {name = "path", max_item_count = 5},
+        {name = "cmdline", max_item_count = 5},
       })
     })
   end,
