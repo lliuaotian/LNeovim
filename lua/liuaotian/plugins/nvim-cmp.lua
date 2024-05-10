@@ -1,4 +1,5 @@
 return {
+  -- 需要安装的全部插件如下
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
@@ -15,6 +16,7 @@ return {
     "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
+  -- settings
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
@@ -58,14 +60,14 @@ return {
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
-      -- sources for autocompletion
+      -- max_item_count设置的是对应的匹配条目输出的最大数量
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
+        { name = "nvim_lsp", max_item_count = 5},
+        { name = "luasnip", max_item_count = 5 }, -- snippets
+        { name = "buffer", max_item_count = 3}, -- text within current buffer
+        { name = "path", max_item_count = 2}, -- file system paths
         { name = "cmp-nvim-lua" },
-        { name = "cmp_tabnine" },
+        { name = "cmp_tabnine", max_item_count = 3},
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       -- formatting = {
@@ -93,6 +95,7 @@ return {
       --     return vim_item
       --   end
       -- },
+      -- 输出样式
 			formatting = {
 				format = function(entry, vim_item)
 					-- if you have lspkind installed, you can use it like
@@ -114,6 +117,11 @@ return {
 					return vim_item
 				end,
 			},
+      -- set lsp show bg
+      -- vim.api.nvim_set_hl(0, 'Pmenu', {bg=none}),
+      -- vim.api.nvim_set_hl(0, 'CmpItemAbbr', {bg=none}),
+      -- vim.api.nvim_set_hl(0, )
+      -- 排序，哪个提示靠前哪个靠后
       sorting = {
         priority_weight = 2,
         comparators = {
