@@ -5,6 +5,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/neodev.nvim", opts = {} },
+    "folke/which-key.nvim",
   },
   config = function()
     -- import lspconfig plugin
@@ -49,6 +50,13 @@ return {
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
       end,
     })
+    -- which-key set
+    local wk = require("which-key")
+    wk.add({
+      {"<leader>r", group = "Lsp Rename & Lsp Restart"},
+      {"<leader>c", group = "Check code action"},
+    })
+
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
     -- Change the Diagnostic symbols in the sign column (gutter)
