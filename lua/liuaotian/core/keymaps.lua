@@ -6,8 +6,26 @@ vim.g.mapleader = " "
 keymap.set("i", "jj", "<ESC>", { desc = "Quick quit insert mode" })
 keymap.set("i", "kk", "<ESC>", { desc = "Quick quit insert mode" })
 
--- to打开新tab，tq退出当前tab tn下一个tab tp上一个tab
+-- 我发现我配置了bufferline但没有使用，这里更改为使用bufferline插件
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" })
 keymap.set("n", "<leader>tq", "<cmd>tabclose<CR>", { desc = "Open new tab" })
-keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Open new tab" })
-keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Open new tab" })
+keymap.set("n", "<leader>tmn", "<cmd>BufferLineMoveNext<CR>", { desc = "Move next tab" })
+keymap.set("n", "<leader>tmp", "<cmd>BufferLineMovePrev<CR>", { desc = "Move prev tab" })
+keymap.set("n", "<leader>tpo", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer tab open" })
+keymap.set("n", "<leader>tpc", "<cmd>BufferLinePickClose<CR>", { desc = "Pick Buffer tab close" })
+keymap.set("n", "<leader>tse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort by extension name" })
+keymap.set("n", "<leader>tsd", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort by directory name" })
+-- 直接leader加数字切换到不同的页面
+keymap.set("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { desc = "Go to 1 tab"})
+keymap.set("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { desc = "Go to 2 tab"})
+keymap.set("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { desc = "Go to 3 tab"})
+keymap.set("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { desc = "Go to 4 tab"})
+keymap.set("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { desc = "Go to 5 tab"})
+keymap.set("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", { desc = "Go to 6 tab"})
+keymap.set("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", { desc = "Go to 7 tab"})
+keymap.set("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", { desc = "Go to 8 tab"})
+keymap.set("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", { desc = "Go to 9 tab"})
+
+-- setting window split
+keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>", { desc = "Vsplit window right"})
+keymap.set("n", "<leader>ws", "<cmd>split<CR>", { desc = "Split window right"})
