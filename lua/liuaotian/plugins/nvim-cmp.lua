@@ -23,17 +23,6 @@ return {
     local lspkind = require("lspkind")
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
-    -- 这一段应该是不需要，先注释掉，不影响使用后删除
-    -- cmp.setup.cmdline(':', {
-    --   mapping = cmp.mapping.preset.cmdline(),
-    --   sources = cmp.config.sources({
-    --     -- { name = 'path' }
-    --   }, {
-    --         { name = 'cmdline' }
-    --     }),
-    --   matching = { disallow_symbol_nonprefix_matching = false }
-    -- })
-
     local compare = require("cmp.config.compare")
     local source_mapping = {
       buffer = "[Buffer]",
@@ -69,33 +58,7 @@ return {
         { name = "cmp-nvim-lua" },
         { name = "cmp_tabnine", max_item_count = 3},
       }),
-      -- configure lspkind for vs-code like pictograms in completion menu
-      -- formatting = {
-      --   format = lspkind.cmp_format({
-      --     mode = 'symbol',
-      --     maxwidth = 50,
-      --     ellipsis_char = "...",
-      --   }),
-      --   
-      -- },
-      -- 设置cmp
-
-      -- formatting = {
-      --   format = function(entry, vim_item)
-      --     vim_item.kind = lspkind.presets.default[vim_item.kind]
-      --     local menu = source_mapping[entry.source.name]
-      --     if entry.source.name == "cmp_tabnine" then
-      --       if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-      --         menu = entry.completion_item.data.detail
-      --       end
-      --       vim_item.kind = "󰀂"
-      --     end
-      --     vim_item.menu = menu
-      --
-      --     return vim_item
-      --   end
-      -- },
-      -- 输出样式
+     -- 输出样式
 			formatting = {
 				format = function(entry, vim_item)
 					-- if you have lspkind installed, you can use it like
@@ -117,11 +80,7 @@ return {
 					return vim_item
 				end,
 			},
-      -- set lsp show bg
-      -- vim.api.nvim_set_hl(0, 'Pmenu', {bg=none}),
-      -- vim.api.nvim_set_hl(0, 'CmpItemAbbr', {bg=none}),
-      -- vim.api.nvim_set_hl(0, )
-      -- 排序，哪个提示靠前哪个靠后
+     -- 排序，哪个提示靠前哪个靠后
       sorting = {
         priority_weight = 2,
         comparators = {
