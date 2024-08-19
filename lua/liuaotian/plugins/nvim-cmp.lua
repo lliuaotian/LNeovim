@@ -28,7 +28,7 @@ return {
       buffer = "[Buffer]",
       nvim_lsp = "[LSP]",
       nvim_lua = "[Lua]",
-      cmp_tabnine = "[AI]",
+      fittencode = "[AI]",
       path = "[Path]",
     }
     cmp.setup({
@@ -43,56 +43,41 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
-        -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+        -- 因为这个c-space在很多系统中是切换输入法 故更换为C-f
+        ["<C-f>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
       }),
       -- max_item_count设置的是对应的匹配条目输出的最大数量
       sources = cmp.config.sources({
-        { name = "nvim_lsp", max_item_count = 5},
-        { name = "luasnip", max_item_count = 5 }, -- snippets
-        { name = "buffer", max_item_count = 3}, -- text within current buffer
-        { name = "path", max_item_count = 2}, -- file system paths
+        { name = "nvim_lsp", max_item_count = 2, priority_weight = 2},
+        { name = "luasnip", max_item_count = 2, priority_weight = 2}, -- snippets
+        { name = "buffer", max_item_count = 2, priority_weight = 1}, -- text within current buffer
+        { name = "path", max_item_count = 2, priority_weight = 3}, -- file system paths
         { name = "cmp-nvim-lua" },
-        { name = "cmp_tabnine", max_item_count = 3},
+        { name = "fittencode", max_item_count = 3, priority_weight = 2},
       }),
      -- 输出样式
 			formatting = {
-				format = function(entry, vim_item)
-					-- if you have lspkind installed, you can use it like
-					-- in the following line:
-					vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
-					vim_item.menu = source_mapping[entry.source.name]
-					if entry.source.name == "cmp_tabnine" then
-						local detail = (entry.completion_item.labelDetails or {}).detail
-						vim_item.kind = ""
-						if detail and detail:find('.*%%.*') then
-							vim_item.kind = vim_item.kind .. ' ' .. detail
-						end
-						if (entry.completion_item.data or {}).multiline then
-							vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
-						end
-					end
-					local maxwidth = 80
-					vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-					return vim_item
-				end,
+       format = lspkind.cmp_format({
+          mode = "symbol",
+          max_width = 30,
+          symbol_map = { FittenCode = "" }
+        })
 			},
      -- 排序，哪个提示靠前哪个靠后
       sorting = {
         priority_weight = 2,
         comparators = {
-          require('cmp_tabnine.compare'),
-          compare.offset,
           compare.exact,
-          compare.score,
-          compare.recently_used,
-          compare.kind,
           compare.sort_text,
-          compare.length,
+          compare.recently_used,
+          compare.offset,
+          compare.score,
+          compare.kind,
           compare.order,
+          compare.length,
         },
       },
     })
