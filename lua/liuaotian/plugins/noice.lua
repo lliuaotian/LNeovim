@@ -9,13 +9,17 @@ return {
     "rcarriga/nvim-notify",
   },
 
+
   config = function()
     require('notify').setup({
+      -- 设置背景颜色为透明，不然会有Warning
       background_colour = "#000000"
     })
     require("noice").setup({
-      format = {
-        cmdline = { title = "Liuaotian", view = "Liuaotian" },
+      cmdline = {
+        format = {
+          cmdline = { kind = "Liuaotian" },
+        }
       },
 			views = {
 				cmdline_popup = {
