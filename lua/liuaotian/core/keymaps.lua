@@ -3,7 +3,7 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 -- 我发现我配置了bufferline但没有使用，这里更改为使用bufferline插件
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" })
-keymap.set("n", "<leader>tq", "<cmd>tabclose<CR>", { desc = "Open new tab" })
+keymap.set("n", "<leader>tq", "<cmd>tabclose<CR>", { desc = "Close current tab" })
 keymap.set("n", "<leader>tmn", "<cmd>BufferLineMoveNext<CR>", { desc = "Move next tab" })
 keymap.set("n", "<leader>tmp", "<cmd>BufferLineMovePrev<CR>", { desc = "Move prev tab" })
 keymap.set("n", "<leader>tpo", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer tab open" })
