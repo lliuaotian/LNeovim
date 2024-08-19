@@ -4,4 +4,4 @@
 Fitten register
 Fitten login
 ```
-Fitten login需要在[FittenCode](https://fittencode.com/)中注册账号，按照提示输入Username和Password。
+Fitten login需要在[FittenCode](https://code.fittentech.com/)中注册账号，按照提示输入Username和Password。
