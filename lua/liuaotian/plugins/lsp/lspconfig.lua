@@ -54,7 +54,7 @@ return {
     local wk = require("which-key")
     wk.add({
       {"<leader>r", group = "Lsp Rename & Lsp Restart"},
-      {"<leader>c", group = "Check code action"},
+      {"<leader>c", group = "Program Code Operate"},
     })
 
     -- used to enable autocompletion (assign to every lsp server config)
