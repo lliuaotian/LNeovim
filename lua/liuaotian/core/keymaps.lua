@@ -1,5 +1,6 @@
 -- set leader
 local keymap = vim.keymap
+local cmd = vim.cmd
 vim.g.mapleader = " "
 -- 我发现我配置了bufferline但没有使用，这里更改为使用bufferline插件
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" })
@@ -35,3 +36,4 @@ keymap.set("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", { desc = "Go to 
 keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>", { desc = "Vsplit window right"})
 keymap.set("n", "<leader>ws", "<cmd>split<CR>", { desc = "Split window right"})
 keymap.set("n", "<leader>w", " ", { desc = "Split Window"})
+
