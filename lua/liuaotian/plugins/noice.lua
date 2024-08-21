@@ -14,10 +14,6 @@ return {
     -- 添加对Telescope的支持
     vim.keymap.set('n', '<leader>fn', "<cmd>Telescope noice<CR>", { desc = "Telescope Find Noice Message" })
 
-    require('notify').setup({
-      -- 设置背景颜色为透明，不然会有Warning
-      background_colour = "#000000"
-    })
     require("noice").setup({
       cmdline = {
         format = {
