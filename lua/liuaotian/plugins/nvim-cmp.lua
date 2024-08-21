@@ -24,13 +24,7 @@ return {
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
     local compare = require("cmp.config.compare")
-    local source_mapping = {
-      buffer = "[Buffer]",
-      nvim_lsp = "[LSP]",
-      nvim_lua = "[Lua]",
-      fittencode = "[AI]",
-      path = "[Path]",
-    }
+
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
@@ -58,7 +52,7 @@ return {
         { name = "cmp-nvim-lua" },
         { name = "fittencode", max_item_count = 3, priority_weight = 2},
       }),
-     -- 输出样式
+      -- 输出样式
 			formatting = {
        format = lspkind.cmp_format({
           mode = "symbol",
