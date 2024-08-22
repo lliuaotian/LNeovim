@@ -41,7 +41,12 @@ return {
         "query",
         "vimdoc",
         "c",
+        "make",
+        "python",
+        "regex",
+        "sql",
       },
+      auto_install = true,
       incremental_selection = {
         enable = true,
         keymaps = {
