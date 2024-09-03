@@ -56,6 +56,8 @@ return {
           node_decremental = "<bs>",
         },
       },
+      -- foldmethod = "expr",
+      -- foldexpr = "nvim_treesitter#foldexpr()",
     })
   end,
 }
